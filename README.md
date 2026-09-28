@@ -41,9 +41,9 @@ For network errors, check internet/proxy access and access to GitHub, Microsoft,
 
 ## Toolkit branch and maintenance
 
-`setup.bat` currently uses `codex/workstation-setup` in [Python-System-Utility-Toolkit](https://github.com/iantolentino/Python-System-Utility-Toolkit). This keeps the launcher usable while the toolkit change is in review. Its branch argument is retained through elevation, cloning/updating, and helper downloads.
+`setup.bat` uses `main` in [Python-System-Utility-Toolkit](https://github.com/iantolentino/Python-System-Utility-Toolkit). Its branch argument is retained through elevation, cloning/updating, and helper downloads. The toolkit update is merged and available on `main`.
 
-After that toolkit branch is merged, change this one line in `setup.bat`:
+The branch is configured with this line in `setup.bat`:
 
 ```bat
 set "TOOLKIT_REF=main"
@@ -51,4 +51,4 @@ set "TOOLKIT_REF=main"
 
 Push the change and let Vercel redeploy. No application code or installer binaries are duplicated in this repository. `/setup.bat` is served without caching so clients receive the current launcher.
 
-The full [toolkit README](https://github.com/iantolentino/Python-System-Utility-Toolkit/blob/codex/workstation-setup/README.md) documents app sources, cache locations, prerequisites, testing, and rebuilding the optional executable.
+The full [toolkit README](https://github.com/iantolentino/Python-System-Utility-Toolkit/blob/main/README.md) documents app sources, cache locations, prerequisites, testing, and rebuilding the optional executable.

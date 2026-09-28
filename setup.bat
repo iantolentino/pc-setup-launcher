@@ -1,6 +1,6 @@
 @echo off
 setlocal EnableExtensions DisableDelayedExpansion
-set "TOOLKIT_REF=codex/workstation-setup"
+set "TOOLKIT_REF=main"
 echo Preparing the Windows workstation setup tool...
 echo Checking Windows Time before the bootstrap download...
 sc.exe start w32time >nul 2>nul
