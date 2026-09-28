@@ -5,7 +5,7 @@ A small, separate repository for a short workstation setup URL. Deploy this stat
 ## Deploy to Vercel
 
 1. In Vercel, choose **Add New > Project** and import `iantolentino/pc-setup-launcher`.
-2. Choose **Other** as the framework preset. Leave the root directory at the repository root. No install or build command is needed; this is a static site.
+2. Leave the root directory at the repository root. `vercel.json` already selects **Other**, skips installation/build commands, and serves the repository root as a static site.
 3. Deploy the project, then open its generated URL.
 4. Click **Copy CMD command** and use it on the new Windows PC.
 
