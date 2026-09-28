@@ -13,13 +13,13 @@ You can also deploy just `index.html` or attach a custom domain later. The comma
 
 ## Copy and paste from the README
 
-Open **Command Prompt as Administrator**, paste the command, and press Enter:
+Open **Command Prompt** normally or as administrator, paste the command, and press Enter:
 
 ```cmd
 curl.exe --fail --location --retry 2 -o "%TEMP%\bootstrap.bat" https://raw.githubusercontent.com/iantolentino/Python-System-Utility-Toolkit/main/bootstrap.bat && call "%TEMP%\bootstrap.bat"
 ```
 
-The command downloads and runs the toolkit's `bootstrap.bat`. The bootstrap checks Windows Time, installs Microsoft App Installer/WinGet, Git, and Python if needed, then automatically opens the maximized Python application. The application itself has no third-party Python dependencies.
+The command downloads and runs the toolkit's `bootstrap.bat`. Normal CMD requests administrator approval; an administrator CMD continues directly. A standard Windows account needs authorized administrator credentials, and cancelling the prompt stops setup. The bootstrap checks Windows Time, installs Git and Python if needed (with WinGet source repair, retries, and signed vendor installer fallbacks), prepares Microsoft App Installer/WinGet for Windows App, then opens the maximized Python application. The application itself has no third-party Python dependencies.
 
 ## What IT does in the application
 

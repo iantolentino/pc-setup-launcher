@@ -39,7 +39,7 @@
     <section class="panel" aria-labelledby="start-heading">
       <h2 id="start-heading">Start from Command Prompt</h2>
       <ol>
-        <li>Open <strong>Command Prompt</strong> using <strong>Run as administrator</strong>.</li>
+        <li>Open <strong>Command Prompt</strong> normally or using <strong>Run as administrator</strong>.</li>
         <li>Copy the command below, paste it into CMD, and press Enter.</li>
         <li>Wait for the application to open, then choose Normal Setup or CNG Setup.</li>
       </ol>
@@ -47,7 +47,7 @@
       <textarea id="command" readonly spellcheck="false">curl.exe --fail --location --retry 2 -o "%TEMP%\bootstrap.bat" https://raw.githubusercontent.com/iantolentino/Python-System-Utility-Toolkit/main/bootstrap.bat &amp;&amp; call "%TEMP%\bootstrap.bat"</textarea>
       <button id="copy" type="button">Copy CMD command</button>
       <span id="copy-status" role="status" aria-live="polite"></span>
-      <p class="help">Requires internet access. Git, Python, and Microsoft App Installer are installed if needed. Accept a Windows administrator prompt if shown.</p>
+      <p class="help">Requires internet access. Git, Python, and Microsoft App Installer are installed if needed. Normal CMD requests administrator approval; a standard user needs administrator credentials.</p>
     </section>
     <div class="categories">
       <section class="category">
