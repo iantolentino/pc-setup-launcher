@@ -1,25 +1,25 @@
 # PC Setup Launcher
 
-A small, separate repository for a short workstation setup URL. Deploy this static website to Vercel, open the page, and click **Copy CMD command**. The page generates the command using the actual deployed domain, so there is no hardcoded Vercel hostname to maintain.
+A single `index.html` page that displays the exact CMD command from the [toolkit README](https://github.com/iantolentino/Python-System-Utility-Toolkit/blob/main/README.md). Deploy the page to Vercel, open it, and click **Copy CMD command**. The HTML includes its styles and clipboard behavior; it requires no other website files.
 
 ## Deploy to Vercel
 
 1. In Vercel, choose **Add New > Project** and import `iantolentino/pc-setup-launcher`.
-2. Leave the root directory at the repository root. `vercel.json` already selects **Other**, skips installation/build commands, and serves the repository root as a static site.
+2. Choose **Other** as the framework preset and leave the root directory at the repository root. Leave install/build commands empty. This is a static HTML page.
 3. Deploy the project, then open its generated URL.
 4. Click **Copy CMD command** and use it on the new Windows PC.
 
-You can attach a custom domain in Vercel later. The page automatically generates its command with whichever domain you open.
+You can also deploy just `index.html` or attach a custom domain later. The command always downloads the bootstrap directly from your toolkit repository on GitHub.
 
 ## Copy and paste from the README
 
-Replace `YOUR-PROJECT.vercel.app` with your deployment's domain. Open **Command Prompt as Administrator**, paste the command, and press Enter:
+Open **Command Prompt as Administrator**, paste the command, and press Enter:
 
 ```cmd
-curl.exe --fail --location --retry 2 -o "%TEMP%\setup.bat" https://YOUR-PROJECT.vercel.app/setup.bat && call "%TEMP%\setup.bat"
+curl.exe --fail --location --retry 2 -o "%TEMP%\bootstrap.bat" https://raw.githubusercontent.com/iantolentino/Python-System-Utility-Toolkit/main/bootstrap.bat && call "%TEMP%\bootstrap.bat"
 ```
 
-The downloaded `setup.bat` checks Windows Time, downloads the toolkit bootstrap with retries, and runs it. The bootstrap installs Microsoft App Installer/WinGet, Git, and Python if needed, then automatically opens the maximized Python application. The application itself has no third-party Python dependencies.
+The command downloads and runs the toolkit's `bootstrap.bat`. The bootstrap checks Windows Time, installs Microsoft App Installer/WinGet, Git, and Python if needed, then automatically opens the maximized Python application. The application itself has no third-party Python dependencies.
 
 ## What IT does in the application
 
@@ -39,16 +39,8 @@ If curl reports a certificate error before the script can run, open **Settings >
 
 For network errors, check internet/proxy access and access to GitHub, Microsoft, and Front downloads. Downloads and prerequisite installation have bounded retries. A failed prerequisite leaves its error visible in CMD; the application shows installation failures in its log. Installation success still needs validation on your workstation configuration.
 
-## Toolkit branch and maintenance
+## Maintenance
 
-`setup.bat` uses `main` in [Python-System-Utility-Toolkit](https://github.com/iantolentino/Python-System-Utility-Toolkit). Its branch argument is retained through elevation, cloning/updating, and helper downloads. The toolkit update is merged and available on `main`.
-
-The branch is configured with this line in `setup.bat`:
-
-```bat
-set "TOOLKIT_REF=main"
-```
-
-Push the change and let Vercel redeploy. No application code or installer binaries are duplicated in this repository. `/setup.bat` is served without caching so clients receive the current launcher.
+Keep the command inside the `index.html` textarea identical to the quick-start CMD command in the toolkit README. Push page changes and let Vercel redeploy. Toolkit updates on `main` are picked up by the bootstrap without changing this page.
 
 The full [toolkit README](https://github.com/iantolentino/Python-System-Utility-Toolkit/blob/main/README.md) documents app sources, cache locations, prerequisites, testing, and rebuilding the optional executable.

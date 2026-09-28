@@ -44,7 +44,7 @@
         <li>Wait for the application to open, then choose Normal Setup or CNG Setup.</li>
       </ol>
       <label for="command">CMD command</label>
-      <textarea id="command" readonly spellcheck="false">Open this page from its deployed Vercel URL to generate the command.</textarea>
+      <textarea id="command" readonly spellcheck="false">curl.exe --fail --location --retry 2 -o "%TEMP%\bootstrap.bat" https://raw.githubusercontent.com/iantolentino/Python-System-Utility-Toolkit/main/bootstrap.bat &amp;&amp; call "%TEMP%\bootstrap.bat"</textarea>
       <button id="copy" type="button">Copy CMD command</button>
       <span id="copy-status" role="status" aria-live="polite"></span>
       <p class="help">Requires internet access. Git, Python, and Microsoft App Installer are installed if needed. Accept a Windows administrator prompt if shown.</p>
@@ -67,8 +67,6 @@
   <script>
     const command = document.getElementById('command');
     const status = document.getElementById('copy-status');
-    const origin = location.protocol === 'file:' ? 'https://YOUR-PROJECT.vercel.app' : location.origin;
-    command.value = `curl.exe --fail --location --retry 2 -o "%TEMP%\\setup.bat" ${origin}/setup.bat && call "%TEMP%\\setup.bat"`;
     document.getElementById('copy').addEventListener('click', async () => {
       try {
         await navigator.clipboard.writeText(command.value);
