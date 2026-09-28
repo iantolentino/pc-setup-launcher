@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Copy the CMD command to prepare a Windows workstation and open Normal Setup or CNG Setup.">
+  <title>PC Setup Launcher</title>
+  <style>
+    :root { color-scheme: light; font-family: Segoe UI, Arial, sans-serif; color: #17243b; background: #f3f6fb; }
+    * { box-sizing: border-box; }
+    body { margin: 0; padding: 64px 20px; }
+    main { max-width: 920px; margin: auto; }
+    .label { color: #2563eb; font-size: 13px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+    h1 { font-size: clamp(30px, 5vw, 46px); margin: 12px 0; letter-spacing: -.03em; }
+    .intro { color: #526179; font-size: 18px; line-height: 1.6; max-width: 720px; }
+    .panel { margin: 30px 0; padding: 28px; border: 1px solid #d9e2ef; border-radius: 16px; background: white; }
+    h2 { font-size: 21px; margin: 0 0 16px; }
+    ol { padding-left: 22px; line-height: 1.9; }
+    label { display: block; margin: 18px 0 8px; font-weight: 600; }
+    textarea { width: 100%; resize: vertical; min-height: 110px; background: #0f172a; color: #dbeafe; border: 0; border-radius: 10px; padding: 18px; font: 14px/1.7 Consolas, monospace; }
+    button { margin-top: 14px; background: #2563eb; color: white; border: 0; border-radius: 8px; padding: 13px 22px; font: 600 15px Segoe UI, sans-serif; cursor: pointer; }
+    button:hover { background: #1d4ed8; }
+    button:focus-visible, textarea:focus-visible { outline: 3px solid #93c5fd; outline-offset: 3px; }
+    #copy-status { display: inline-block; margin-left: 12px; font-size: 14px; color: #16803c; }
+    .categories { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .category { padding: 22px; border: 1px solid #d9e2ef; border-radius: 12px; background: white; }
+    .category h2 { margin-top: 8px; }
+    .category p, .help { color: #526179; line-height: 1.6; }
+    a { color: #2563eb; }
+    footer { margin-top: 28px; color: #617089; font-size: 14px; }
+    @media (max-width: 620px) { body { padding: 32px 16px; } .panel { padding: 20px; } .categories { grid-template-columns: 1fr; } #copy-status { display: block; margin: 12px 0 0; } }
+  </style>
+</head>
+<body>
+  <main>
+    <span class="label">IT workstation provisioning</span>
+    <h1>Prepare a new Windows PC.</h1>
+    <p class="intro">Run one command to install the setup prerequisites and open the workstation toolkit. Then choose the setup your PC needs.</p>
+    <section class="panel" aria-labelledby="start-heading">
+      <h2 id="start-heading">Start from Command Prompt</h2>
+      <ol>
+        <li>Open <strong>Command Prompt</strong> using <strong>Run as administrator</strong>.</li>
+        <li>Copy the command below, paste it into CMD, and press Enter.</li>
+        <li>Wait for the application to open, then choose Normal Setup or CNG Setup.</li>
+      </ol>
+      <label for="command">CMD command</label>
+      <textarea id="command" readonly spellcheck="false">Open this page from its deployed Vercel URL to generate the command.</textarea>
+      <button id="copy" type="button">Copy CMD command</button>
+      <span id="copy-status" role="status" aria-live="polite"></span>
+      <p class="help">Requires internet access. Git, Python, and Microsoft App Installer are installed if needed. Accept a Windows administrator prompt if shown.</p>
+    </section>
+    <div class="categories">
+      <section class="category">
+        <span class="label">Category 1</span>
+        <h2>Normal Setup</h2>
+        <p>Install OBS Studio, AnyDesk, TeamLogger, Zoom, Microsoft Teams, WinRAR, Microsoft Office, and RustDesk.</p>
+      </section>
+      <section class="category">
+        <span class="label">Category 2</span>
+        <h2>CNG Setup</h2>
+        <p>Install Front desktop and Microsoft Windows App. Selecting this category sets the Windows timezone to Sydney.</p>
+      </section>
+    </div>
+    <p class="help">If a download fails, check your internet connection and Windows date/time, then run the command again. In the toolkit, use <strong>Check / Sync Time</strong> and <strong>Retry Last Task</strong> after fixing an error. Microsoft Office may display its own setup window.</p>
+    <footer><a href="https://github.com/iantolentino/Python-System-Utility-Toolkit">Toolkit source and usage guide</a> · <a href="https://github.com/iantolentino/pc-setup-launcher">Launcher source</a></footer>
+  </main>
+  <script>
+    const command = document.getElementById('command');
+    const status = document.getElementById('copy-status');
+    const origin = location.protocol === 'file:' ? 'https://YOUR-PROJECT.vercel.app' : location.origin;
+    command.value = `curl.exe --fail --location --retry 2 -o "%TEMP%\\setup.bat" ${origin}/setup.bat && call "%TEMP%\\setup.bat"`;
+    document.getElementById('copy').addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(command.value);
+        status.textContent = 'Copied. Paste into CMD.';
+      } catch {
+        command.focus();
+        command.select();
+        status.textContent = document.execCommand('copy') ? 'Copied. Paste into CMD.' : 'Command selected. Press Ctrl+C to copy.';
+      }
+    });
+  </script>
+</body>
+</html>
